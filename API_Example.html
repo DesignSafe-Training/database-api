@@ -1,0 +1,1081 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Application Programming Interfaces &#8212; Application Programming Interfaces and Relational Databases</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'API_Example';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Creating a SQLite database" href="SQLite_Example.html" />
+    <link rel="prev" title="Overview" href="README.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Application Programming Interfaces and Relational Databases</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="README.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Application Programming Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLite_Example.html">Creating a SQLite database</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/DesignSafe-Training/database-api" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/DesignSafe-Training/database-api/issues/new?title=Issue%20on%20page%20%2FAPI_Example.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/API_Example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Application Programming Interfaces</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-traffic-data">Real-time traffic data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcome-1">Learning Outcome 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcome-2">Learning Outcome 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcome-3">Learning Outcome 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcome-4">Learning Outcome 4</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="application-programming-interfaces">
+<h1>Application Programming Interfaces<a class="headerlink" href="#application-programming-interfaces" title="Permalink to this heading">#</a></h1>
+<p>2024 NHERI Computational Academy<br />
+Scott J. Brandenberg</p>
+<section id="real-time-traffic-data">
+<h2>Real-time traffic data<a class="headerlink" href="#real-time-traffic-data" title="Permalink to this heading">#</a></h2>
+<p>On Day 1, Charlie Dey presented a nice example using Pandas and Matplotlib to visualize real-time traffic data in Austin, TX from <a class="reference external" href="https://data.austintexas.gov/Transportation-and-Mobility/Real-Time-Traffic-Incident-Reports/dx9v-zd7x/about_data">this link</a>. He first downloaded a CSV file from the website, then loaded that CSV file into a Pandas dataframe.</p>
+<p>What we’ll do in this notebook is use their API to retrieve custom data from the website instead of downloading the entire dataset as a CSV file. A benefit of using the API is that we can apply filters as part of the query to retrieve only the data that we need to plot, which saves some time and storage.</p>
+</section>
+<section id="learning-outcomes">
+<h2>Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permalink to this heading">#</a></h2>
+<p>This notebook will demonstrate how to:</p>
+<ol class="arabic simple">
+<li><p>Use the Python requests package to submit a GET HTTP request to the Austin real-time traffic API</p></li>
+<li><p>Convert the retrieved JSON string to a Python dictionary</p></li>
+<li><p>Convert the retrieved JSON string to a Pandas dataframe</p></li>
+<li><p>Add filters to the HTTP request to be more selective in data retrieval</p></li>
+<li><p>Plot the traffic events by creating a lat / lon scatterplot</p></li>
+</ol>
+</section>
+<section id="learning-outcome-1">
+<h2>Learning Outcome 1<a class="headerlink" href="#learning-outcome-1" title="Permalink to this heading">#</a></h2>
+<p>Use the Python requests package to submit a GET HTTP request to the Austin real-time traffic API</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">io</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://data.austintexas.gov/resource/dx9v-zd7x.json?&#39;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">r_json</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1"># The retrieved string is very long, so we shouldn&#39;t print the whole thing. </span>
+<span class="c1"># Just print the first 100 characters here.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r_json</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&quot;traffic_report_id&quot;:&quot;121E4F6B2D93D3F508359C8700406A1B992733AF_1659735434&quot;,&quot;published_date&quot;:&quot;2022-0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="learning-outcome-2">
+<h2>Learning Outcome 2<a class="headerlink" href="#learning-outcome-2" title="Permalink to this heading">#</a></h2>
+<p>Convert the retrieved JSON string to a Python dictionary. Actually, the data comes to us as an array of JSON strings, so we will create a Python list of dictionaries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will use the Python json package and the &quot;loads&quot; command to convert</span>
+<span class="c1"># the string to a Python dictionary, and print the first entry of the array</span>
+<span class="c1"># to make sure it worked correctly</span>
+
+<span class="n">r_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r_json</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r_dict</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;traffic_report_id&#39;: &#39;121E4F6B2D93D3F508359C8700406A1B992733AF_1659735434&#39;, &#39;published_date&#39;: &#39;2022-08-05T21:37:14.000Z&#39;, &#39;issue_reported&#39;: &#39;TRFC HAZD/ DEBRIS&#39;, &#39;location&#39;: {&#39;type&#39;: &#39;Point&#39;, &#39;coordinates&#39;: [0, 0]}, &#39;latitude&#39;: &#39;0&#39;, &#39;longitude&#39;: &#39;0&#39;, &#39;address&#39;: &#39;tra&#39;, &#39;traffic_report_status&#39;: &#39;ARCHIVED&#39;, &#39;traffic_report_status_date_time&#39;: &#39;2022-08-05T21:50:03.000Z&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="learning-outcome-3">
+<h2>Learning Outcome 3<a class="headerlink" href="#learning-outcome-3" title="Permalink to this heading">#</a></h2>
+<p>Convert the retrieved JSON string to a Pandas dataframe. Python dictionaries are cool and everything, but Charlie used Pandas, so I’ll do the same here. We have to wrap the JSON string using StringIO to prevent that annoying Pandas deprecation warning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 3. Convert the data from a JSON string to a Pandas dataframe</span>
+
+<span class="n">r_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">r_json</span><span class="p">))</span>
+<span class="n">r_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>traffic_report_id</th>
+      <th>published_date</th>
+      <th>issue_reported</th>
+      <th>location</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>address</th>
+      <th>traffic_report_status</th>
+      <th>traffic_report_status_date_time</th>
+      <th>:@computed_region_pgdr_vyqg</th>
+      <th>:@computed_region_u569_ruue</th>
+      <th>:@computed_region_ap3j_c5bq</th>
+      <th>:@computed_region_99rk_ypn4</th>
+      <th>:@computed_region_g44y_bfnm</th>
+      <th>:@computed_region_jcrc_4uuy</th>
+      <th>:@computed_region_q9nd_rr82</th>
+      <th>:@computed_region_e9j2_6w3z</th>
+      <th>:@computed_region_m2th_e4b7</th>
+      <th>:@computed_region_rxpj_nzrk</th>
+      <th>agency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>121E4F6B2D93D3F508359C8700406A1B992733AF_16597...</td>
+      <td>2022-08-05T21:37:14.000Z</td>
+      <td>TRFC HAZD/ DEBRIS</td>
+      <td>{'type': 'Point', 'coordinates': [0, 0]}</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>tra</td>
+      <td>ARCHIVED</td>
+      <td>2022-08-05 21:50:03+00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B852035718A45A6479B38C26FA96B28B0C9A8A56_16615...</td>
+      <td>2022-08-26T21:05:01.000Z</td>
+      <td>TRFC HAZD/ DEBRIS</td>
+      <td>{'type': 'Point', 'coordinates': [0, 0]}</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>900 S FM 973</td>
+      <td>ARCHIVED</td>
+      <td>2022-08-26 21:35:03+00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>B7CA5DF711D07BA6D03B6EF004402A6594C77CD6_16622...</td>
+      <td>2022-09-04T04:16:02.000Z</td>
+      <td>COLLISION</td>
+      <td>{'type': 'Point', 'coordinates': [0, 0]}</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>12009 W US 290 HWY</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-04 05:40:03+00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5F5898E4726001663BA5A126B313B03B1AED3F07_16631...</td>
+      <td>2022-09-14T15:14:19.000Z</td>
+      <td>Crash Urgent</td>
+      <td>{'type': 'Point', 'coordinates': [-97.711561, ...</td>
+      <td>30.307396</td>
+      <td>-97.711561</td>
+      <td>4900 N Ih 35 Nb</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-14 15:30:04+00:00</td>
+      <td>10.0</td>
+      <td>22.0</td>
+      <td>5.0</td>
+      <td>94.0</td>
+      <td>6.0</td>
+      <td>11.0</td>
+      <td>10.0</td>
+      <td>38.0</td>
+      <td>309.0</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3791C82875F2B544CEFA8FBE35109575B1431A30_16631...</td>
+      <td>2022-09-14T13:50:59.000Z</td>
+      <td>TRFC HAZD/ DEBRIS</td>
+      <td>{'type': 'Point', 'coordinates': [-97.820007, ...</td>
+      <td>30.233228</td>
+      <td>-97.820007</td>
+      <td>4953-4973 W Us 290 Hwy Eb</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-14 14:10:02+00:00</td>
+      <td>68.0</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>178.0</td>
+      <td>6.0</td>
+      <td>32.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>126.0</td>
+      <td>53.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="learning-outcome-4">
+<h2>Learning Outcome 4<a class="headerlink" href="#learning-outcome-4" title="Permalink to this heading">#</a></h2>
+<p>Add filters to the HTTP request to be more selective in data retrieval. There are a few issues we need to sort out here. First, the API by default returns only 1000 entries. But we don’t want to limit the data in this way because the full dataset has about 350,000 entries. Second, there were problems with some of the lat / lon coordinates in the original dataset. We filtered those out in post-processing before by looking only at latitude values between 30 and 31 and longitude values between -97 and -98. But if we use the API, we can make the server filter them for us and only return the ones we want.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://data.austintexas.gov/resource/dx9v-zd7x.json?$limit=500000&amp;$where=latitude between 29.5 and 31 and longitude between -98.5 and -97&#39;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">r_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+<span class="n">r_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>traffic_report_id</th>
+      <th>published_date</th>
+      <th>issue_reported</th>
+      <th>location</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>address</th>
+      <th>traffic_report_status</th>
+      <th>traffic_report_status_date_time</th>
+      <th>agency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5F5898E4726001663BA5A126B313B03B1AED3F07_16631...</td>
+      <td>2022-09-14T15:14:19.000Z</td>
+      <td>Crash Urgent</td>
+      <td>{'type': 'Point', 'coordinates': [-97.711561, ...</td>
+      <td>30.307396</td>
+      <td>-97.711561</td>
+      <td>4900 N Ih 35 Nb</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-14 15:30:04+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3791C82875F2B544CEFA8FBE35109575B1431A30_16631...</td>
+      <td>2022-09-14T13:50:59.000Z</td>
+      <td>TRFC HAZD/ DEBRIS</td>
+      <td>{'type': 'Point', 'coordinates': [-97.820007, ...</td>
+      <td>30.233228</td>
+      <td>-97.820007</td>
+      <td>4953-4973 W Us 290 Hwy Eb</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-14 14:10:02+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>00F36866326DA3B8DDE0D960226DCD6AFB5AF127_16630...</td>
+      <td>2022-09-13T13:02:12.000Z</td>
+      <td>Crash Service</td>
+      <td>{'type': 'Point', 'coordinates': [-97.780078, ...</td>
+      <td>30.439546</td>
+      <td>-97.780078</td>
+      <td>13096 N Us 183 Hwy Svrd Sb</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-13 13:25:04+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5546443CF7936F056C25DF636352D217C030756C_16631...</td>
+      <td>2022-09-14T13:16:12.000Z</td>
+      <td>Stalled Vehicle</td>
+      <td>{'type': 'Point', 'coordinates': [-97.735557, ...</td>
+      <td>30.383593</td>
+      <td>-97.735557</td>
+      <td>0 RESEARCH NB TO N MOPAC SVRD NB RAMP</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-14 14:10:02+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>85CA1FFDE3C0A7F9418AA74D8309CAF5A31749E9_16630...</td>
+      <td>2022-09-13T16:32:09.000Z</td>
+      <td>LOOSE LIVESTOCK</td>
+      <td>{'type': 'Point', 'coordinates': [-97.933901, ...</td>
+      <td>30.597314</td>
+      <td>-97.933901</td>
+      <td>Round Mountain Rd &amp; Great Oaks Blvd</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-13 19:20:03+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>380966</th>
+      <td>EAEBB5DB2B93D9B0E80FF737B2983A774CDED173_17217...</td>
+      <td>2024-07-23T16:04:59.000Z</td>
+      <td>Traffic Hazard</td>
+      <td>{'type': 'Point', 'coordinates': [-97.761749, ...</td>
+      <td>30.424873</td>
+      <td>-97.761749</td>
+      <td>11707-11799 Oak Knoll Dr</td>
+      <td>ARCHIVED</td>
+      <td>2024-07-23 16:25:15+00:00</td>
+      <td>AUSTIN PD</td>
+    </tr>
+    <tr>
+      <th>380967</th>
+      <td>5982FD0F37D93127B4D15129788CC3DE204635A9_17217...</td>
+      <td>2024-07-23T16:24:19.000Z</td>
+      <td>Crash Urgent</td>
+      <td>{'type': 'Point', 'coordinates': [-97.730994, ...</td>
+      <td>30.274565</td>
+      <td>-97.730994</td>
+      <td>N Ih 35 Svrd Nb / E 15th St</td>
+      <td>ACTIVE</td>
+      <td>2024-07-23 16:30:20+00:00</td>
+      <td>AUSTIN PD</td>
+    </tr>
+    <tr>
+      <th>380968</th>
+      <td>BBFBF362460D2B5A1573BC939A7419DF3FFF1A54_17217...</td>
+      <td>2024-07-23T16:29:00.000Z</td>
+      <td>Crash Urgent</td>
+      <td>{'type': 'Point', 'coordinates': [-97.834105, ...</td>
+      <td>30.223264</td>
+      <td>-97.834105</td>
+      <td>6301-6617 S Mopac Expy Nb</td>
+      <td>ACTIVE</td>
+      <td>2024-07-23 16:30:20+00:00</td>
+      <td>AUSTIN PD</td>
+    </tr>
+    <tr>
+      <th>380969</th>
+      <td>ABCD1C5876F36174110775438923CE78ACBF8594_17217...</td>
+      <td>2024-07-23T14:53:08.000Z</td>
+      <td>Traffic Hazard</td>
+      <td>{'type': 'Point', 'coordinates': [-97.77275, 3...</td>
+      <td>30.187118</td>
+      <td>-97.772750</td>
+      <td>6900 S IH 35 NB</td>
+      <td>ARCHIVED</td>
+      <td>2024-07-23 16:35:16+00:00</td>
+      <td>AUSTIN PD</td>
+    </tr>
+    <tr>
+      <th>380970</th>
+      <td>6F510F4A180384CE18F926AB595E20AE16FA1E2E_17217...</td>
+      <td>2024-07-23T16:01:03.000Z</td>
+      <td>COLLISION WITH INJURY</td>
+      <td>{'type': 'Point', 'coordinates': [-97.944348, ...</td>
+      <td>30.568998</td>
+      <td>-97.944348</td>
+      <td>14300-14314 ROUND MOUNTAIN RD</td>
+      <td>ARCHIVED</td>
+      <td>2024-07-23 16:35:16+00:00</td>
+      <td>TRAVIS COUNTY SHERIF</td>
+    </tr>
+  </tbody>
+</table>
+<p>380971 rows × 10 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>traffic_report_id</th>
+      <th>published_date</th>
+      <th>issue_reported</th>
+      <th>location</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>address</th>
+      <th>traffic_report_status</th>
+      <th>traffic_report_status_date_time</th>
+      <th>agency</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5F5898E4726001663BA5A126B313B03B1AED3F07_16631...</td>
+      <td>2022-09-14T15:14:19.000Z</td>
+      <td>Crash Urgent</td>
+      <td>{'type': 'Point', 'coordinates': [-97.711561, ...</td>
+      <td>30.307396</td>
+      <td>-97.711561</td>
+      <td>4900 N Ih 35 Nb</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-14 15:30:04+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3791C82875F2B544CEFA8FBE35109575B1431A30_16631...</td>
+      <td>2022-09-14T13:50:59.000Z</td>
+      <td>TRFC HAZD/ DEBRIS</td>
+      <td>{'type': 'Point', 'coordinates': [-97.820007, ...</td>
+      <td>30.233228</td>
+      <td>-97.820007</td>
+      <td>4953-4973 W Us 290 Hwy Eb</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-14 14:10:02+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>00F36866326DA3B8DDE0D960226DCD6AFB5AF127_16630...</td>
+      <td>2022-09-13T13:02:12.000Z</td>
+      <td>Crash Service</td>
+      <td>{'type': 'Point', 'coordinates': [-97.780078, ...</td>
+      <td>30.439546</td>
+      <td>-97.780078</td>
+      <td>13096 N Us 183 Hwy Svrd Sb</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-13 13:25:04+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5546443CF7936F056C25DF636352D217C030756C_16631...</td>
+      <td>2022-09-14T13:16:12.000Z</td>
+      <td>Stalled Vehicle</td>
+      <td>{'type': 'Point', 'coordinates': [-97.735557, ...</td>
+      <td>30.383593</td>
+      <td>-97.735557</td>
+      <td>0 RESEARCH NB TO N MOPAC SVRD NB RAMP</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-14 14:10:02+00:00</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>85CA1FFDE3C0A7F9418AA74D8309CAF5A31749E9_16630...</td>
+      <td>2022-09-13T16:32:09.000Z</td>
+      <td>LOOSE LIVESTOCK</td>
+      <td>{'type': 'Point', 'coordinates': [-97.933901, ...</td>
+      <td>30.597314</td>
+      <td>-97.933901</td>
+      <td>Round Mountain Rd &amp; Great Oaks Blvd</td>
+      <td>ARCHIVED</td>
+      <td>2022-09-13 19:20:03+00:00</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> widget
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">lat</span> <span class="o">=</span> <span class="n">r_df</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">r_df</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="n">r_df</span><span class="p">[</span><span class="s1">&#39;traffic_report_status_date_time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">year</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[Y]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1970</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lon</span><span class="p">[</span><span class="n">year</span><span class="o">&lt;</span><span class="mi">2020</span><span class="p">],</span> <span class="n">lat</span><span class="p">[</span><span class="n">year</span><span class="o">&lt;</span><span class="mi">2020</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lon</span><span class="p">[</span><span class="n">year</span><span class="o">&gt;=</span><span class="mi">2020</span><span class="p">],</span> <span class="n">lat</span><span class="p">[</span><span class="n">year</span><span class="o">&gt;=</span><span class="mi">2020</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;longitude [deg]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;latitude [deg]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "f42cae93aa5d4e52a649aceb73fd973f", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">r_df</span><span class="p">[</span><span class="n">r_df</span><span class="p">[</span><span class="s1">&#39;issue_reported&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;LOOSE LIVESTOCK&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10431
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="README.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Overview</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="SQLite_Example.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Creating a SQLite database</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-traffic-data">Real-time traffic data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes">Learning outcomes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcome-1">Learning Outcome 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcome-2">Learning Outcome 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcome-3">Learning Outcome 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcome-4">Learning Outcome 4</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Scott J. Brandenberg
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

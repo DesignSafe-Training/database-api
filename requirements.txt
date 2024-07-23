@@ -1,7 +1,0 @@
-Pygments
-jupyter-book
-matplotlib
-numpy
-json
-pandas
-requests
