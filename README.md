@@ -1,9 +1,9 @@
 # Databases and Application Programming Interfaces
 > Scott Brandenberg, UCLA
 
-A Hands-On Tutorial
-Wednesday, July 24
-NHERI Computational Academy
+A Hands-On Tutorial  
+Wednesday, July 24  
+NHERI Computational Academy  
 
 Data scientists spend most of their time wrangling and cleaning data, and comparably small amounts of time training algorithms to learn from the data. Dealing with data not as exciting as training a neural network, or random forest, or building a LLM, but is very important to provide the foundation from which we can do our work. Many natural hazards engineers are not familiar with relational databases, structured query language, and application programming interfaces, favoring instead to work with Excel files or comma separated value (CSV) files. 
 
